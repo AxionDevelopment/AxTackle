@@ -14,6 +14,16 @@ CreateThread(function()
     end
 end)
 
+function IsPlayingRestrictedEmote()
+    local playerPed = cache.ped
+    for _, emote in ipairs(AxTackleConfig.RestrictedEmotes) do
+        if IsEntityPlayingAnim(playerPed, emote.dict, emote.anim, 3) then
+            return true
+        end
+    end
+    return false
+end
+
 CreateThread(function()
     local Tackling = false
 
@@ -25,7 +35,7 @@ CreateThread(function()
         end
 
         -- SHIFT + E
-        if IsControlPressed(1, 21) and IsControlPressed(1, 38) and not Tackling and not GettingTackled then 
+        if IsControlPressed(1, 21) and IsControlPressed(1, 38) and not Tackling and not GettingTackled and not IsPlayingRestrictedEmote() then
             if onCooldown then
                 if not msgTimer then
                     if AxTackleConfig.NotificationType == 'axionnotification' and GetResourceState('AxionNotifications') == 'started' then

@@ -17,3 +17,15 @@ AxTackleConfig.Resistable = false
 
 -- Keys that can be used to resist tackles. Default is 'W' for forward movement.
 AxTackleConfig.ResistKeys = {'W'}
+
+-- Emotes that when active, does not allow players to tackle.
+AxTackleConfig.RestrictedEmotes = {
+    {
+        dict = 'mp_arrest_paired',
+        anim = 'crook_p2_back_right'
+    },
+    {
+        dict = 'random@mugging3',
+        anim = 'handsup_standing_base'
+    }
+}
