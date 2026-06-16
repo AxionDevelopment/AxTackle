@@ -29,3 +29,8 @@ AxTackleConfig.RestrictedEmotes = {
         anim = 'handsup_standing_base'
     }
 }
+
+-- Emotes that when active, does not allow players to tackle.
+AxTackleConfig.UntackleablePeds = {
+    { hash = 'HOMELANDER' }
+}

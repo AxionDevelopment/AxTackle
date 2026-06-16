@@ -24,6 +24,15 @@ function IsPlayingRestrictedEmote()
     return false
 end
 
+function IsPedUntackleable(playerPed)
+    for _, ped in ipairs(AxTackleConfig.UntackleablePeds) do
+        if GetEntityModel(playerPed) == GetHashKey(ped.hash) then
+            return true
+        end
+    end
+    return false
+end
+
 CreateThread(function()
     local Tackling = false
 
@@ -52,7 +61,7 @@ CreateThread(function()
             else
                 local closestTargetId, closestTargetPed = lib.getClosestPlayer(GetEntityCoords(cache.ped), AxTackleConfig.MaximumDistance, false)
                 
-                if closestTargetId and not IsPedInAnyVehicle(closestTargetPed) and GetEntityHealth(closestTargetPed) > 0 then
+                if closestTargetId and not IsPedInAnyVehicle(closestTargetPed) and GetEntityHealth(closestTargetPed) > 0 and not IsPedUntackleable(closestTargetPed) then
                     Tackling = true
 
                     local canTackle = lib.callback.await('player:tryTackling', 10000, GetPlayerServerId(closestTargetId))
